@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
             interact.SetActive(true);
             Debug.Log("Interacting");
         }
+        else
+        {
+            interact.SetActive(false);
+        }
 
         if (controller.isGrounded)
         {
