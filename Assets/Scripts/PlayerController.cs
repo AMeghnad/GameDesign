@@ -11,10 +11,30 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;
     public float jumpSpeed = 10f;
     public float gravity = 20f;
+    public float pushForce = 10f;
+    public bool isInteracting = false; // Sets to true when colliding with interactable
+    public LayerMask hitLayers;
 
     private Vector3 direction = Vector3.zero;
 
     public CharacterController controller;
+
+    void Interact()
+    {
+        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        // Fire ray out from camera
+        if (Physics.Raycast(camRay, out hit, 1000f, hitLayers))
+        {   
+            // Hit an object
+            Rigidbody rigid = hit.collider.GetComponent<Rigidbody>();
+            if (rigid)
+            {
+                // Add force to object
+                rigid.AddForceAtPosition(-hit.normal * pushForce, hit.point);
+            }
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,15 +42,13 @@ public class PlayerController : MonoBehaviour
         inputH = Input.GetAxis("Horizontal");
         inputV = Input.GetAxis("Vertical");
 
-        // If interacting
-        if (Input.GetMouseButtonDown(0))
+        if (isInteracting)
         {
-            interact.SetActive(true);
-            Debug.Log("Interacting");
-        }
-        else
-        {
-            interact.SetActive(false);
+            // If the interact button is pressed
+            if (Input.GetMouseButtonDown(0))
+            {
+                Interact();
+            }
         }
 
         if (controller.isGrounded)
@@ -51,5 +69,15 @@ public class PlayerController : MonoBehaviour
         }
         direction.y -= gravity * Time.deltaTime;
         controller.Move(direction * Time.deltaTime);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        isInteracting = true;    
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        isInteracting = false;
     }
 }
