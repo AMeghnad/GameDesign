@@ -19,13 +19,20 @@ public class PlayerController : MonoBehaviour
 
     public CharacterController controller;
 
+    // Start is called just before any of the Update methods is called the first time
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     void Interact()
     {
         Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         // Fire ray out from camera
         if (Physics.Raycast(camRay, out hit, 1000f, hitLayers))
-        {   
+        {
             // Hit an object
             Rigidbody rigid = hit.collider.GetComponent<Rigidbody>();
             if (rigid)
@@ -45,7 +52,7 @@ public class PlayerController : MonoBehaviour
         if (isInteracting)
         {
             // If the interact button is pressed
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
                 Interact();
             }
@@ -73,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        isInteracting = true;    
+        isInteracting = true;
     }
 
     void OnTriggerExit(Collider other)
