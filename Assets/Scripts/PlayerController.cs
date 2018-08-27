@@ -26,9 +26,21 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
     }
 
+    void OnDrawGizmosSelected()
+    {
+        Transform camTransform = Camera.main.transform;
+        Vector3 camEuler = camTransform.eulerAngles;
+        Quaternion rotation = Quaternion.AngleAxis(camEuler.y, Vector3.up);
+        Ray camRay = new Ray(camTransform.position, rotation * Vector3.forward);
+        Gizmos.DrawLine(camRay.origin, camRay.origin + camRay.direction * 1000f);
+    }
+
     void Interact()
     {
-        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Transform camTransform = Camera.main.transform;
+        Vector3 camEuler = camTransform.eulerAngles;
+        Quaternion rotation = Quaternion.AngleAxis(camEuler.y, Vector3.up);
+        Ray camRay = new Ray(camTransform.position, rotation * Vector3.forward);
         RaycastHit hit;
         // Fire ray out from camera
         if (Physics.Raycast(camRay, out hit, 1000f, hitLayers))
