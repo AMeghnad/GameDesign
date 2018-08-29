@@ -14,12 +14,13 @@ public class PlayerController : MonoBehaviour
     public float pushForce = 10f;
     public bool isInteracting = false; // Sets to true when colliding with interactable
     public LayerMask hitLayers;
-    public InteractType interactType = InteractType.BUTTON;
+    public InteractType interactType;
     public enum InteractType
     {
         BUTTON = 0,
         PUSHABLE = 1,
-        MINIGAME = 2
+        MINIGAME = 2,
+        DOOR = 3
     }
 
     private Vector3 direction = Vector3.zero;
@@ -44,7 +45,6 @@ public class PlayerController : MonoBehaviour
 
     void Interact()
     {
-
         Transform camTransform = Camera.main.transform;
         Vector3 camEuler = camTransform.eulerAngles;
         Quaternion rotation = Quaternion.AngleAxis(camEuler.y, Vector3.up);
@@ -53,17 +53,6 @@ public class PlayerController : MonoBehaviour
         // Fire ray out from camera
         if (Physics.Raycast(camRay, out hit, 1000f, hitLayers))
         {
-            switch (interactType)
-            {
-                case InteractType.BUTTON:
-
-                    break;
-                case InteractType.PUSHABLE:
-                    break;
-                case InteractType.MINIGAME:
-                    break;                  
-            }
-
             // Hit an object
             Rigidbody rigid = hit.collider.GetComponent<Rigidbody>();
             if (rigid)
@@ -71,6 +60,25 @@ public class PlayerController : MonoBehaviour
                 // Add force to object
                 rigid.AddForceAtPosition(-hit.normal * pushForce, hit.point);
             }
+            //switch (interactType)
+            //{
+            //    case InteractType.BUTTON:
+
+            //        break;
+            //    case InteractType.PUSHABLE:
+            //        // Hit an object
+            //        Rigidbody rigid = hit.collider.GetComponent<Rigidbody>();
+            //        if (rigid)
+            //        {
+            //            // Add force to object
+            //            rigid.AddForceAtPosition(-hit.normal * pushForce, hit.point);
+            //        }
+            //        break;
+            //    case InteractType.MINIGAME:
+            //        break;
+            //    default:
+            //        break;
+            //}
         }
     }
 
@@ -112,6 +120,10 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         isInteracting = true;
+        if (other.gameObject.tag == "Door")
+        {
+            print("You Win!");
+        }
     }
 
     void OnTriggerExit(Collider other)
