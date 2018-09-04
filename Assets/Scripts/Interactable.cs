@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Interactable : MonoBehaviour
 {
     public string interactEnum;
+    public InteractType interactType;
 
     // Use this for initialization
     protected virtual void Awake()
@@ -15,6 +17,6 @@ public class Interactable : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-
+        interactType = (InteractType)System.Enum.Parse(typeof(InteractType), interactEnum);
     }
 }

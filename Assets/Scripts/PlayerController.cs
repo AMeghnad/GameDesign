@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,13 +16,8 @@ public class PlayerController : MonoBehaviour
     public bool isInteracting = false; // Sets to true when colliding with interactable
     public LayerMask hitLayers;
     public InteractType interactType;
-    public enum InteractType
-    {
-        BUTTON = 0,
-        PUSHABLE = 1,
-        MINIGAME = 2,
-        DOOR = 3
-    }
+    public bool doorOpen = false;
+   
 
     private Vector3 direction = Vector3.zero;
 
@@ -52,33 +48,31 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         // Fire ray out from camera
         if (Physics.Raycast(camRay, out hit, 1000f, hitLayers))
-        {
-            // Hit an object
-            Rigidbody rigid = hit.collider.GetComponent<Rigidbody>();
-            if (rigid)
+        {           
+            switch (interactType)
             {
-                // Add force to object
-                rigid.AddForceAtPosition(-hit.normal * pushForce, hit.point);
-            }
-            //switch (interactType)
-            //{
-            //    case InteractType.BUTTON:
+                case InteractType.BUTTON:
 
-            //        break;
-            //    case InteractType.PUSHABLE:
-            //        // Hit an object
-            //        Rigidbody rigid = hit.collider.GetComponent<Rigidbody>();
-            //        if (rigid)
-            //        {
-            //            // Add force to object
-            //            rigid.AddForceAtPosition(-hit.normal * pushForce, hit.point);
-            //        }
-            //        break;
-            //    case InteractType.MINIGAME:
-            //        break;
-            //    default:
-            //        break;
-            //}
+                    break;
+                case InteractType.PUSHABLE:
+                    // Hit an object
+                    Rigidbody rigid = hit.collider.GetComponent<Rigidbody>();
+                    if (rigid)
+                    {
+                        // Add force to object
+                        rigid.AddForceAtPosition(-hit.normal * pushForce, hit.point);
+                    }                   
+                    break;
+                case InteractType.MINIGAME:
+                    break;
+                default:
+                    if (gameObject.tag == "Door")
+                    {
+                        print("Level Complete! Loading next level...");
+                        SceneManager.LoadScene(2);
+                    }
+                    break;
+            }
         }
     }
 
@@ -120,9 +114,11 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         isInteracting = true;
-        if (other.gameObject.tag == "Door")
+       
+        if (interactType == InteractType.BUTTON)
         {
-            print("You Win!");
+            doorOpen = true;
+
         }
     }
 
@@ -130,4 +126,11 @@ public class PlayerController : MonoBehaviour
     {
         isInteracting = false;
     }
+}
+public enum InteractType
+{
+    BUTTON = 0,
+    PUSHABLE = 1,
+    MINIGAME = 2,
+    DOOR = 3
 }
