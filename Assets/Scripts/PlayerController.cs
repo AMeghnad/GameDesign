@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask hitLayers;
     public InteractType interactType;
     public bool doorOpen = false;
-   
+
 
     private Vector3 direction = Vector3.zero;
 
@@ -48,11 +48,18 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         // Fire ray out from camera
         if (Physics.Raycast(camRay, out hit, 1000f, hitLayers))
-        {           
+        {
             switch (interactType)
             {
+                case InteractType.Untagged:
+                    Debug.LogWarning("Invalid");
+                    break;
                 case InteractType.BUTTON:
+                    if (interactType == InteractType.BUTTON)
+                    {
+                        doorOpen = true;
 
+                    }
                     break;
                 case InteractType.PUSHABLE:
                     // Hit an object
@@ -61,16 +68,15 @@ public class PlayerController : MonoBehaviour
                     {
                         // Add force to object
                         rigid.AddForceAtPosition(-hit.normal * pushForce, hit.point);
-                    }                   
+                    }
                     break;
                 case InteractType.MINIGAME:
                     break;
+                case InteractType.DOOR:
+                    print("Level Complete! Loading next level...");
+                    SceneManager.LoadScene(2);
+                    break;
                 default:
-                    if (gameObject.tag == "Door")
-                    {
-                        print("Level Complete! Loading next level...");
-                        SceneManager.LoadScene(2);
-                    }
                     break;
             }
         }
@@ -114,21 +120,19 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         isInteracting = true;
-       
-        if (interactType == InteractType.BUTTON)
-        {
-            doorOpen = true;
-
-        }
+        interactType = other.gameObject.GetComponent<Interactable>().interactType;
+        Debug.Log(interactType);
     }
 
     void OnTriggerExit(Collider other)
     {
         isInteracting = false;
+        interactType = InteractType.Untagged;
     }
 }
 public enum InteractType
 {
+    Untagged = -1,
     BUTTON = 0,
     PUSHABLE = 1,
     MINIGAME = 2,
