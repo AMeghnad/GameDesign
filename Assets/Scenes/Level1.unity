@@ -192,7 +192,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh4182
+  m_Name: pb_Mesh-2716
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -1205,7 +1205,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1172
+  m_Name: pb_Mesh-2728
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -2142,6 +2142,46 @@ Prefab:
     - target: {fileID: 1725069490337992, guid: 4bb754e6b07a37445983da02c026b1b5, type: 2}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114081424019691832, guid: 4bb754e6b07a37445983da02c026b1b5,
+        type: 2}
+      propertyPath: _quads.Array.data[0]._mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 59774001fe261e241861fd09ce19914d, type: 2}
+    - target: {fileID: 114081424019691832, guid: 4bb754e6b07a37445983da02c026b1b5,
+        type: 2}
+      propertyPath: _quads.Array.data[1]._mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 59774001fe261e241861fd09ce19914d, type: 2}
+    - target: {fileID: 114081424019691832, guid: 4bb754e6b07a37445983da02c026b1b5,
+        type: 2}
+      propertyPath: _quads.Array.data[2]._mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 59774001fe261e241861fd09ce19914d, type: 2}
+    - target: {fileID: 114081424019691832, guid: 4bb754e6b07a37445983da02c026b1b5,
+        type: 2}
+      propertyPath: _quads.Array.data[3]._mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 59774001fe261e241861fd09ce19914d, type: 2}
+    - target: {fileID: 114081424019691832, guid: 4bb754e6b07a37445983da02c026b1b5,
+        type: 2}
+      propertyPath: _quads.Array.data[4]._mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 59774001fe261e241861fd09ce19914d, type: 2}
+    - target: {fileID: 114081424019691832, guid: 4bb754e6b07a37445983da02c026b1b5,
+        type: 2}
+      propertyPath: _quads.Array.data[5]._mat
+      value: 
+      objectReference: {fileID: 2100000, guid: 59774001fe261e241861fd09ce19914d, type: 2}
+    - target: {fileID: 64310741888222160, guid: 4bb754e6b07a37445983da02c026b1b5,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64310741888222160, guid: 4bb754e6b07a37445983da02c026b1b5,
+        type: 2}
+      propertyPath: m_Convex
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4bb754e6b07a37445983da02c026b1b5, type: 2}
@@ -3742,7 +3782,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-67130
+  m_Name: pb_Mesh12686
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -3892,3 +3932,34 @@ Mesh:
   m_MeshMetrics[0]: 1
   m_MeshMetrics[1]: 1
   m_MeshOptimized: 0
+--- !u!1 &2086428561 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1725069490337992, guid: 4bb754e6b07a37445983da02c026b1b5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1735440742}
+--- !u!136 &2086428562
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2086428561}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1.5
+  m_Height: 4
+  m_Direction: 1
+  m_Center: {x: 1.5, y: 2, z: -0.1}
+--- !u!114 &2086428563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2086428561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63fdc4d005706984ea6753eab4ead14e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactEnum: 
+  interactType: 3

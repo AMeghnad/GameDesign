@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        doorOpen = false;
     }
 
     void OnDrawGizmosSelected()
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawLine(camRay.origin, camRay.origin + camRay.direction * 1000f);
     }
 
-    void Interact()
+    void CheckInteract()
     {
         Transform camTransform = Camera.main.transform;
         Vector3 camEuler = camTransform.eulerAngles;
@@ -58,7 +59,6 @@ public class PlayerController : MonoBehaviour
                     if (interactType == InteractType.BUTTON)
                     {
                         doorOpen = true;
-
                     }
                     break;
                 case InteractType.PUSHABLE:
@@ -73,8 +73,15 @@ public class PlayerController : MonoBehaviour
                 case InteractType.MINIGAME:
                     break;
                 case InteractType.DOOR:
-                    print("Level Complete! Loading next level...");
-                    SceneManager.LoadScene(2);
+                    if (doorOpen)
+                    {
+                        print("Level Complete! Loading next level...");
+                        SceneManager.LoadScene(2);
+                    }
+                    if (!doorOpen)
+                    {
+                        print("You need to find a way to open the door. Try the red button");
+                    }
                     break;
                 default:
                     break;
@@ -93,7 +100,8 @@ public class PlayerController : MonoBehaviour
             // If the interact button is pressed
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                Interact();
+                // Check which object you're interacting with
+                CheckInteract();
             }
         }
 
@@ -120,8 +128,11 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         isInteracting = true;
-        interactType = other.gameObject.GetComponent<Interactable>().interactType;
-        Debug.Log(interactType);
+        if (other.gameObject.layer == 10)
+        {
+            interactType = other.gameObject.GetComponent<Interactable>().interactType;
+            Debug.Log(interactType);
+        }
     }
 
     void OnTriggerExit(Collider other)
