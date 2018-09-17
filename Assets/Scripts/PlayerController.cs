@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     public float pushForce = 10f;
     public bool isInteracting = false; // Sets to true when colliding with interactable
     public LayerMask hitLayers;
-    public InteractType interactType;
     public bool doorOpen = false;
 
 
@@ -47,44 +46,43 @@ public class PlayerController : MonoBehaviour
         Quaternion rotation = Quaternion.AngleAxis(camEuler.y, Vector3.up);
         Ray camRay = new Ray(camTransform.position, rotation * Vector3.forward);
         RaycastHit hit;
+        isInteracting = false;
         // Fire ray out from camera
-        if (Physics.Raycast(camRay, out hit, 1000f, hitLayers))
+        if (Physics.Raycast(camRay, out hit, 1000f, hitLayers, QueryTriggerInteraction.Collide))
         {
-            switch (interactType)
+            isInteracting = true;
+            Interactable interactable = hit.collider.GetComponent<Interactable>();
+            if (interactable)
             {
-                case InteractType.Untagged:
-                    Debug.LogWarning("Invalid");
-                    break;
-                case InteractType.BUTTON:
-                    if (interactType == InteractType.BUTTON)
-                    {
-                        doorOpen = true;
-                    }
-                    break;
-                case InteractType.PUSHABLE:
-                    // Hit an object
-                    Rigidbody rigid = hit.collider.GetComponent<Rigidbody>();
-                    if (rigid)
-                    {
-                        // Add force to object
-                        rigid.AddForceAtPosition(-hit.normal * pushForce, hit.point);
-                    }
-                    break;
-                case InteractType.MINIGAME:
-                    break;
-                case InteractType.DOOR:
-                    if (doorOpen)
-                    {
-                        print("Level Complete! Loading next level...");
-                        SceneManager.LoadScene(2);
-                    }
-                    if (!doorOpen)
-                    {
-                        print("You need to find a way to open the door. Try the red button");
-                    }
-                    break;
-                default:
-                    break;
+                InteractType interactType = interactable.type;
+                switch (interactType)
+                {                      
+                    case InteractType.BUTTON:
+                        doorOpen = !doorOpen;
+                        break;
+                    case InteractType.PUSHABLE:
+                        interactable.Push(-hit.normal * pushForce, hit.point);
+                        break;
+                    case InteractType.MINIGAME:
+                        break;
+                    case InteractType.DOOR:
+                        if (doorOpen)
+                        {
+                            print("Level Complete! Loading next level...");
+                            SceneManager.LoadScene(2);
+                        }
+                        if (!doorOpen)
+                        {
+                            print("You need to find a way to open the door. Try the red button");
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                Debug.LogError("There is no 'Interactable' script attached to the thing we hit");
             }
         }
     }
@@ -95,15 +93,13 @@ public class PlayerController : MonoBehaviour
         inputH = Input.GetAxis("Horizontal");
         inputV = Input.GetAxis("Vertical");
 
-        if (isInteracting)
+        // If the interact button is pressed
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            // If the interact button is pressed
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                // Check which object you're interacting with
-                CheckInteract();
-            }
+            // Check which object you're interacting with
+            CheckInteract();
         }
+
 
         if (controller.isGrounded)
         {
@@ -124,26 +120,9 @@ public class PlayerController : MonoBehaviour
         direction.y -= gravity * Time.deltaTime;
         controller.Move(direction * Time.deltaTime);
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        isInteracting = true;
-        if (other.gameObject.layer == 10)
-        {
-            interactType = other.gameObject.GetComponent<Interactable>().interactType;
-            Debug.Log(interactType);
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        isInteracting = false;
-        interactType = InteractType.Untagged;
-    }
 }
 public enum InteractType
 {
-    Untagged = -1,
     BUTTON = 0,
     PUSHABLE = 1,
     MINIGAME = 2,

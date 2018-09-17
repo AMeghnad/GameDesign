@@ -25,10 +25,9 @@ GameObject:
   - component: {fileID: 54374012909144674}
   - component: {fileID: 114348206821091244}
   - component: {fileID: 136752068035334160}
-  - component: {fileID: 114440548204239276}
   m_Layer: 10
   m_Name: CloningTank
-  m_TagString: PUSHABLE
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +70,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1476322405584896}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.15, y: 3.05, z: -0.85}
+  m_LocalPosition: {x: -0.66, y: 5, z: -6.5}
   m_LocalScale: {x: 3, y: 2, z: 3}
   m_Children:
   - {fileID: 4852691614264550}
@@ -200,21 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63fdc4d005706984ea6753eab4ead14e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactEnum: 
-  interactType: 0
---- !u!114 &114440548204239276
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1476322405584896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63fdc4d005706984ea6753eab4ead14e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactEnum: 
-  interactType: 0
+  type: 1
 --- !u!136 &136154760584527260
 CapsuleCollider:
   m_ObjectHideFlags: 1
