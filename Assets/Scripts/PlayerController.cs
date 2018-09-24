@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public bool isInteracting = false; // Sets to true when colliding with interactable
     public LayerMask hitLayers;
     public bool doorOpen = false;
+    [SerializeField]
+    GameObject stairs;
 
 
     private Vector3 direction = Vector3.zero;
@@ -56,7 +58,7 @@ public class PlayerController : MonoBehaviour
             {
                 InteractType interactType = interactable.type;
                 switch (interactType)
-                {                      
+                {
                     case InteractType.BUTTON:
                         doorOpen = !doorOpen;
                         break;
@@ -119,6 +121,9 @@ public class PlayerController : MonoBehaviour
         }
         direction.y -= gravity * Time.deltaTime;
         controller.Move(direction * Time.deltaTime);
+
+        if (doorOpen)
+            stairs.SetActive(true);
     }
 }
 public enum InteractType

@@ -1067,6 +1067,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114324557147354160, guid: dcedb5b606413ae4bb0bb5bed70aeb0f,
+        type: 2}
+      propertyPath: stairs
+      value: 
+      objectReference: {fileID: 1919990908}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dcedb5b606413ae4bb0bb5bed70aeb0f, type: 2}
   m_IsPrefabAsset: 0
@@ -3676,7 +3681,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh23870
+  m_Name: pb_Mesh12558
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
