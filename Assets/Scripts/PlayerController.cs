@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour
         Quaternion rotation = Quaternion.AngleAxis(camEuler.y, Vector3.up);
         Ray camRay = new Ray(camTransform.position, rotation * Vector3.forward);
         RaycastHit hit;
-        isInteracting = false;
         // Fire ray out from camera
         if (Physics.Raycast(camRay, out hit, 1000f, hitLayers, QueryTriggerInteraction.Collide))
         {
@@ -60,7 +59,7 @@ public class PlayerController : MonoBehaviour
                 switch (interactType)
                 {
                     case InteractType.BUTTON:
-                        doorOpen = !doorOpen;
+                        doorOpen = true;
                         break;
                     case InteractType.PUSHABLE:
                         interactable.Push(-hit.normal * pushForce, hit.point);
@@ -70,8 +69,8 @@ public class PlayerController : MonoBehaviour
                     case InteractType.DOOR:
                         if (doorOpen)
                         {
-                            print("Level Complete! Loading next level...");
-                            SceneManager.LoadScene(2);
+                            Debug.Log("Level Complete! Loading next level...");
+                            SceneManager.LoadScene("Level2");
                         }
                         if (!doorOpen)
                         {
@@ -84,7 +83,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                Debug.LogError("There is no 'Interactable' script attached to the thing we hit");
+                Debug.Log("There is no 'Interactable' script attached to the thing we hit");
             }
         }
     }
