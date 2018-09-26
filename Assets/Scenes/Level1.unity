@@ -113,25 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &22309499 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1941325199316240, guid: 8039cfed6d889cb48ad5d0b3fde3ce4a,
-    type: 2}
-  m_PrefabInternal: {fileID: 1704880101}
---- !u!64 &22309500
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 22309499}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 169675360}
 --- !u!1 &29277983 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1429745244231154, guid: b2c62f395e57b054b906082572c7cae9,
@@ -212,6 +193,7 @@ Mesh:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_Name: pb_Mesh-8310
 =======
   m_Name: pb_Mesh16082
@@ -228,6 +210,9 @@ Mesh:
 =======
   m_Name: pb_Mesh-573778
 >>>>>>> parent of 293d4a3... Added art assets
+=======
+  m_Name: pb_Mesh-8310
+>>>>>>> parent of 961bcdd... Merge branch 'master' of https://github.com/AMeghnad/GameDesign
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -1279,7 +1264,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh16138
+  m_Name: pb_Mesh4194
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -1986,7 +1971,8 @@ Prefab:
       propertyPath: m_Name
       value: CloningTank (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 8e5c1e45553a7884db9521d0f2bfca89, type: 2}
   m_IsPrefabAsset: 0
 --- !u!4 &1541093119 stripped
@@ -2226,7 +2212,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 2036178789}
@@ -3719,7 +3705,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh16294
+  m_Name: pb_Mesh12558
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
